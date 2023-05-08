@@ -39,8 +39,6 @@ This level requires editing textures the same way as above, but also materials.
 
 The mods you can make will target the "Textures and Materials" skin and iris frameworks.
 
-Please note that, while locating materials can be tedious in the current stable Penumbra version (0.6.6.5 at the time of writing), work is ongoing to eventually make it easier.
-
 For all of the sections below, you first have to select the wanted material in Penumbra's Advanced Editing window and go into the `g_MaterialParameter` part, in Advanced Shader Resources. Once you're done, don't forget to save your file.
 
 ### Iris/Skin: Glow Adjustment
@@ -51,6 +49,20 @@ To globally adjust the iris or skin glow, add the constant with ID `0x8F6498D1` 
 - The second value is the global glow multiplier in dark environments.
 
 Both values must be set to 1 if you just want to have the same result as with the "Textures-only (Legacy)" frameworks.
+
+### Hair: Glow (Emissive) and Glow Adjustment
+
+To add glow information to hair, you have to edit the multi map. The glow information is to be added to the multi map's blue channel, in non-inverted form ("black" is no glow, "white" is full glow).
+
+To globally adjust the hair glow, add the constant with ID `0x8F6498D1`, as described above.
+
+### Skin: Hair on Standard (non-Hrothgar) Body
+
+To add hair information to skin that uses the standard body shader, add the constant with ID `0xD367C386` and set it to 1.
+
+Then, add the hair influence information (just like the green channel for the Hrothgar shader) to the blue channel, and add the primary/secondary mix information (just like the blue channel for the Hrothgar shader) to the alpha channel.
+
+The multi map's green channel will still be used as a specular map (instead of the hardcoded 20% value the Hrothgar shader uses).
 
 ### Skin: Auri Scale Iridescence
 
@@ -98,7 +110,7 @@ The left half of the textures will be applied to the right eye, and the right ha
 
 Please note that the catchlight map's UVs have nothing to do with the vertex UVs: instead, they are calculated using the normal vector. It is therefore impossible to change the catchlight map's UV layout using something else than a shader package without adverse effects.
 
-### Iris/Skin: 1.x/2.x-like Bloom Effect
+### Hair/Iris/Skin: 1.x/2.x-like Bloom Effect
 
 The overdone bloom effect that was found in Atramentum Luminis 1.x and 2.x was due to it being calculated using a wrong formula (in some way, it's a bug that's been fixed in 3.0).
 
@@ -147,7 +159,7 @@ There is no standard path for these new maps, but I suggest following the conven
 
 In Shader Keys (still in Advanced Shader Resources), add key `0x9D4A3204` and set it to `0x1E8ABB16`.
 
-### Iris: Switching to level 3
+### Hair/Iris: Switching to level 3
 
 In Samplers, add g_SamplerDiffuse, g_SamplerEmissive and g_SamplerEffectMask.
 
@@ -169,7 +181,7 @@ The alpha channel of the emissive map is interpreted as "how much does this map 
 
 The glow adjustment parameter still applies to the emissive map.
 
-### Iris: Using the diffuse and emissive maps
+### Hair/Iris: Using the diffuse and emissive maps
 
 The red, green and blue channels of the diffuse and emissive maps are actual color data.
 
@@ -202,6 +214,12 @@ You can use the following JSON file in PNG Mapper to automatically generate an e
   "mapping": "out_x.r = 1.0 - smoothstep(\n  0.2, 0.3, Math.abs(in_m.r - 0.5));\n\nout_x.g = 0.0;\nout_x.b = 0.0;\nout_x.a = 1.0;"
 }
 ```
+
+### Hair: Iridescence and Using the effect mask
+
+The effect mask for hair works exactly like the one for skin.
+
+Hair iridescence is only available at level 3 and works the same way as level 3 skin iridescence (the mask has to be explicit and the 2nd, 3rd and 4th values of the material parameter are ignored).
 
 ### Compatibility
 
