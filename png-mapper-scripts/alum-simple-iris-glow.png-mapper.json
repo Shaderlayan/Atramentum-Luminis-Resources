@@ -1,0 +1,5 @@
+{
+  "inputs": [ "in_mask" ],
+  "outputs": [ "out_mask" ],
+  "mapping": "const toCenter = sub(mul([u, v], 2), 1);\nconst R = dot(toCenter, toCenter);\n\nconst gl = 0.7 * (saturate(Math.sin(Math.PI * R)) ** 2);\n\nout_mask.rgb = in_mask.rgb;\nout_mask.a = 1 - gl;"
+}

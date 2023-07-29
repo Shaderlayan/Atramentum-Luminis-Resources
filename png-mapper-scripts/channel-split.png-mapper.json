@@ -1,0 +1,5 @@
+{
+  "inputs": [ "combined" ],
+  "outputs": [ "rch", "gch", "bch", "ach" ],
+  "mapping": "rch.gray = combined.r;\nrch.a = 1;\n\ngch.gray = combined.g;\ngch.a = 1;\n\nbch.gray = combined.b;\nbch.a = 1;\n\nach.gray = combined.a;\nach.a = 1;"
+}

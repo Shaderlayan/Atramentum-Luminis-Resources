@@ -1,0 +1,5 @@
+{
+  "inputs": [ "base_d", "base_m", "regular_tattoo", "glowing_tattoo" ],
+  "outputs": [ "tattooed_d", "tattooed_m" ],
+  "mapping": "tattooed_d.rgb = over(\n    glowing_tattoo.rgba, over(\n        regular_tattoo.rgba,\n        [...base_d.rgb, 1]));\ntattooed_d.a = base_d.a\n    * (1 - glowing_tattoo.a);\n\ntattooed_m.rgba = base_m.rgba;\ntattooed_m.r *= (1 - regular_tattoo.a)\n    * (1 - glowing_tattoo.a);"
+}

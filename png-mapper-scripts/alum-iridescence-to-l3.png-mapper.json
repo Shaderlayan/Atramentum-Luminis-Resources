@@ -1,0 +1,5 @@
+{
+  "inputs": [ "in_m" ],
+  "outputs": [ "out_x" ],
+  "mapping": "out_x.r = 1.0 - smoothstep(\n  0.2, 0.3, Math.abs(in_m.r - 0.5));\n\nout_x.g = 0.0;\nout_x.b = 0.0;\nout_x.a = 1.0;"
+}

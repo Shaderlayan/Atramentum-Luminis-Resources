@@ -1,0 +1,5 @@
+{
+  "inputs": [ "in_multi", "in_color" ],
+  "outputs": [ "out_diffuse", "out_emissive" ],
+  "mapping": "const rgb = mul(in_color.rgb, in_multi.r);\n\nout_diffuse.rgb = rgb;\nout_diffuse.a = in_color.a;\n\nout_emissive.rgb = mul(rgb, Math.sqrt(1 - in_multi.a));\nout_emissive.a = in_color.a;"
+}

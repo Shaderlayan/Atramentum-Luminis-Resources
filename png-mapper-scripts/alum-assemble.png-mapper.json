@@ -1,0 +1,5 @@
+{
+  "inputs": [ "diffuse", "glow" ],
+  "outputs": [ "alum_diffuse" ],
+  "mapping": "alum_diffuse.rgb = diffuse.rgb;\nalum_diffuse.a = 1 - glow.gray;"
+}
