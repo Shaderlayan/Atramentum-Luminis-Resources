@@ -4,27 +4,27 @@ This document contains general information about skin, iris and hair materials o
 
 ## Material parameters
 
-| Key        | Name                | Type       | Defined by         | Color set equivalent |
-|------------|---------------------|------------|--------------------|----------------------|
-| `15B70E35` | ???                 | Real       | Vanilla            | -                    |
-| `174BB64E` | g_LipFresnelValue0  | RGB        | Vanilla            | Specular Color       |
-| `29AC0223` | g_AlphaThreshold    | Real       | Vanilla            | -                    |
-| `2C2A34DD` | g_DiffuseColor      | RGB        | Vanilla            | Diffuse Color        |
-| `2E60B071` | g_TileScale         | 2 reals    | Vanilla            | Repeat               |
-| `36080AD0` | g_SpecularMask      | Real       | Vanilla            | Specular Strength    |
-| `38A64362` | g_EmissiveColor     | RGB        | Vanilla            | Emissive Color       |
-| `4103FEEF` | g_ScaleIridescence  | 8 reals    | Atramentum Luminis | -                    |
-| `4255F2F4` | g_TileIndex         | Integer    | Vanilla            | Tile                 |
-| `575ABFB2` | g_AreaAlignment ??? | Real       | Vanilla            | -                    |
-| `5E3ABDFB` | g_AsymmetryAdapter  | Integer(s) | Atramentum Luminis | -                    |
-| `62E44A4F` | g_FresnelValue0     | RGB        | Vanilla            | Specular Color       |
-| `878B272C` | g_LipShininess      | Real       | Vanilla            | Gloss Strength       |
-| `8F6498D1` | g_EmissiveRedirect  | 2 reals    | Atramentum Luminis | -                    |
-| `992869AB` | g_Shininess         | Real       | Vanilla            | Gloss Strength       |
-| `A5EDBE5C` | g_LegacyBloom       | 2 reals    | Atramentum Luminis | -                    |
-| `B500BB24` | g_ScatteringLevel   | Real       | Vanilla            | -                    |
-| `B5545FBB` | g_NormalScale       | Real       | Vanilla            | -                    |
-| `D367C386` | g_StdHairInfluence  | Real       | Atramentum Luminis | -                    |
+| Key        | Name                   | Type       | Defined by         | Color set equivalent |
+|------------|------------------------|------------|--------------------|----------------------|
+| `15B70E35` | ???                    | Real       | Vanilla            | -                    |
+| `174BB64E` | g_LipFresnelValue0     | RGB        | Vanilla            | Specular Color       |
+| `29AC0223` | g_AlphaThreshold       | Real       | Vanilla            | -                    |
+| `2C2A34DD` | g_DiffuseColor         | RGB        | Vanilla            | Diffuse Color        |
+| `2E60B071` | g_TileScale            | 2 reals    | Vanilla            | Repeat               |
+| `36080AD0` | g_SpecularMask         | Real       | Vanilla            | Specular Strength    |
+| `38A64362` | g_EmissiveColor        | RGB        | Vanilla            | Emissive Color       |
+| `4103FEEF` | g_ScaleIridescence     | 8 reals    | Atramentum Luminis | -                    |
+| `4255F2F4` | g_TileIndex            | Integer    | Vanilla            | Tile                 |
+| `575ABFB2` | g_AmbientOcclusionMask | Real       | Vanilla            | -                    |
+| `5E3ABDFB` | g_AsymmetryAdapter     | Integer(s) | Atramentum Luminis | -                    |
+| `62E44A4F` | g_FresnelValue0        | RGB        | Vanilla            | Specular Color       |
+| `878B272C` | g_LipShininess         | Real       | Vanilla            | Gloss Strength       |
+| `8F6498D1` | g_EmissiveRedirect     | 2 reals    | Atramentum Luminis | -                    |
+| `992869AB` | g_Shininess            | Real       | Vanilla            | Gloss Strength       |
+| `A5EDBE5C` | g_LegacyBloom          | 2 reals    | Atramentum Luminis | -                    |
+| `B500BB24` | g_ScatteringLevel      | Real       | Vanilla            | -                    |
+| `B5545FBB` | g_NormalScale          | Real       | Vanilla            | -                    |
+| `D367C386` | g_StdHairInfluence     | Real       | Atramentum Luminis | -                    |
 
 Material parameters are always encoded as C `float`s. "Integer" means any supplied fractional part will be at best useless, at worst only harmful, and "RGB" means the parameter is a triplet of reals with red-green-blue semantics.
 
