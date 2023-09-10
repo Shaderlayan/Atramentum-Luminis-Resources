@@ -2,6 +2,8 @@
 
 ⚠️ A word of warning before beginning: some of the manipulations described in the later sections of this manual _can crash your game if done wrong_. Please carefully read and fully understand any paragraph marked with warning signs before proceeding. ⚠️
 
+**Penumbra 0.7.3.3+ users**: A great part of the manipulations described later have been replaced by simpler and/or safer ones, and most hexadecimal identifiers have been replaced by plain English names. This guide will be updated again when these changes will be available in the stable channel. Also, for optimal material authoring experience, it's strongly recommended to install [Material Development Kit](https://heliosphere.app/mod/bktfny69y57gf4y42bp4tn5z38), at a lower priority than Atramentum Luminis.
+
 Please note that this manual expects the reader to have a certain level of knowledge about general texture editing, and knowledge about how to locate the wanted files in Penumbra.
 
 It also assumes that the reader can use a texture editing program that fully preserves color information even in transparent pixels.
@@ -39,11 +41,11 @@ This level requires editing textures the same way as above, but also materials.
 
 The mods you can make will target the "Textures and Materials" skin and iris frameworks.
 
-For all of the sections below, you first have to select the wanted material in Penumbra's Advanced Editing window and go into the `g_MaterialParameter` part, in Advanced Shader Resources. Once you're done, don't forget to save your file.
+For all of the sections below, you first have to select the wanted material in Penumbra's Advanced Editing window and go into the `g_MaterialParameter` part, in Advanced Shader Resources *(in 733+: Material Constants)*. Once you're done, don't forget to save your file.
 
 ### Iris/Skin: Glow Adjustment
 
-To globally adjust the iris or skin glow, add the constant with ID `0x8F6498D1` (it may already be there if editing an already modded material).
+To globally adjust the iris or skin glow, add the constant with ID `0x8F6498D1` *(in 733+: Emissive Conversion)* (it may already be there if editing an already modded material).
 
 - The first value is the global glow multiplier in well-lit environments ;
 - The second value is the global glow multiplier in dark environments.
@@ -54,11 +56,11 @@ Both values must be set to 1 if you just want to have the same result as with th
 
 To add glow information to hair, you have to edit the multi map. The glow information is to be added to the multi map's blue channel, in non-inverted form ("black" is no glow, "white" is full glow).
 
-To globally adjust the hair glow, add the constant with ID `0x8F6498D1`, as described above.
+To globally adjust the hair glow, add the constant with ID `0x8F6498D1` *(in 733+: Emissive Conversion)*, as described above.
 
 ### Skin: Hair on Standard (non-Hrothgar) Body
 
-To add hair information to skin that uses the standard body shader, add the constant with ID `0xD367C386` and set it to 1.
+To add hair information to skin that uses the standard body shader, add the constant with ID `0xD367C386` *(in 733+: Enable Hair Influence)* and set it to 1.
 
 Then, add the hair influence information (just like the green channel for the Hrothgar shader) to the blue channel, and add the primary/secondary mix information (just like the blue channel for the Hrothgar shader) to the alpha channel.
 
@@ -66,18 +68,18 @@ The multi map's green channel will still be used as a specular map (instead of t
 
 ### Skin: Auri Scale Iridescence
 
-To add an iridescence effect to Auri scales like in the Hannish scale ointment mod, add the constant with ID `0x4103FEEF` to a skin material.
+To add an iridescence effect to Auri scales like in the Hannish scale ointment mod, add the constant with ID `0x4103FEEF` *(in 733+: Iridescence)* to a skin material.
 
 Auri scales are detected depending on the red channel of the multi map: by default, values between 25% and 75% are considered scales.
 
-- The first value is the global iridescence effect multiplier ;
-- The second value shifts the scale detection range: for example (assuming other control values are 0), 0 means 25% to 75%, -0.2 means 5% to 55% ;
-- The third value narrows or expands the scale detection range: for example (assuming other control values are 0), 0 means 25% to 75%, 0.1 means 15% to 85% ;
-- The fourth value sharpens or softens the ends of the scale detection range: for example (assuming other control values are 0), 0 means that the effect gradually rolls off from 30% to 20%, -0.05 means that it's all-or-nothing above and below 25% ;
-- The fifth value attenuates the effect by applying a bias to the normals: 0 is equivalent to HSO's "Vibrant" options, 0.5 is equivalent to HSO's "Normal" options, 1 is equivalent to HSO's "Faint" options ;
-- The sixth value is the maximum chroma radius to use: 0 will make the effect gray, 50 will be equivalent to HSO ;
-- The seventh value is the hue angle shift in degrees: 0 gives a reddish hue to scales that face towards the right of the screen, positive values rotate the effect counterclockwise ;
-- The eight value is the hue angle multiplier (it will be rounded to the nearest integer).
+- The first value *(in 733+: Effect Strength)* is the global iridescence effect multiplier ;
+- The second value *(in 733+: Scale Detection Range Center)* shifts the scale detection range: for example (assuming other control values are 0), 0 *(in 733+: 0.5)* means 25% to 75%, -0.2 *(in 733+: 0.3)* means 5% to 55% ;
+- The third value *(in 733+: Scale Detection Range Tolerance)* narrows or expands the scale detection range: for example (assuming other control values are 0), 0 *(in 733+: 0.25)* means 25% to 75%, 0.1 *(in 733+: 0.35)* means 15% to 85% ;
+- The fourth value *(in 733+: Scale Detection Range Fuzziness)* sharpens or softens the ends of the scale detection range: for example (assuming other control values are 0), 0 *(in 733+: 0.05)* means that the effect gradually rolls off from 30% to 20%, -0.05 *(in 733+: 0)* means that it's all-or-nothing above and below 25% ;
+- The fifth value *(in 733+: Normal Z Bias)* attenuates the effect by applying a bias to the normals: 0 is equivalent to HSO's "Vibrant" options, 0.5 is equivalent to HSO's "Normal" options, 1 is equivalent to HSO's "Faint" options ;
+- The sixth value *(in 733+: Chroma)* is the maximum chroma radius to use: 0 will make the effect gray, 50 will be equivalent to HSO ;
+- The seventh value *(in 733+: Hue Shift)* is the hue angle shift in degrees: 0 gives a reddish hue to scales that face towards the right of the screen, positive values rotate the effect counterclockwise ;
+- The eight value *(in 733+: Hue Multiplier)* is the hue angle multiplier (it will be rounded to the nearest integer).
 
 The effect is compatible with most scale overlays with the three control values left at 0, and should be compatible with all of them by tweaking these values.
 
@@ -85,7 +87,7 @@ Note: all the builds of Hannish scale ointment since 2.0 are actually just speci
 
 ### Skin: Asymmetry Adapter
 
-If you want to use an asymmetric texture with a symmetric model, or a symmetric texture with an asymmetric model, add the constant with ID `0x5E3ABDFB`.
+If you want to use an asymmetric texture with a symmetric model, or a symmetric texture with an asymmetric model, add the constant with ID `0x5E3ABDFB` *(in 733+: Asymmetry Adapter)*.
 
 - If your texture matches your model, the value must be set to 0 ;
 - If your texture is asymmetric and your model is symmetric, the value must be set to 1 ;
@@ -101,7 +103,7 @@ The left half of the textures will be applied to the right half of the body/face
 
 ### Iris: Asymmetry Adapter
 
-If you want to use an asymmetric texture with a symmetric model, a symmetric texture with an asymmetric model, or an asymmetric catchlight map, add the constant with ID `0x5E3ABDFB`.
+If you want to use an asymmetric texture with a symmetric model, a symmetric texture with an asymmetric model, or an asymmetric catchlight map, add the constant with ID `0x5E3ABDFB` *(in 733+: Asymmetry Adapter)*.
 
 - The first value works in the same way as the value for the skin asymmetry adapter ;
 - The second value must be 0 if your catchlight map is symmetric, 1 if it's asymmetric.
@@ -114,7 +116,7 @@ Please note that the catchlight map's UVs have nothing to do with the vertex UVs
 
 The overdone bloom effect that was found in Atramentum Luminis 1.x and 2.x was due to it being calculated using a wrong formula (in some way, it's a bug that's been fixed in 3.0).
 
-Yet, if you liked it, it's still available, and can be configured by adding the constant with ID `0xA5EDBE5C`.
+Yet, if you liked it, it's still available, and can be configured by adding the constant with ID `0xA5EDBE5C` *(in 733+: Legacy Bloom)*.
 
 - The first value is the global bloom multiplier in well-lit environments ;
 - The second value is the global bloom multiplier in dark environments.
@@ -145,6 +147,8 @@ Please note that this level changes how some things are interpreted in such a wa
 
 ### Skin: Switching to level 3
 
+**Penumbra 0.7.3.3+ users**: Go to the Shader section and set Atramentum Luminis Semantics to Level 3. The rest of this section only applies up to 0.7.3.2, save for the path recommendations.
+
 In Samplers (in Advanced Shader Resources), add g_SamplerEmissive and g_SamplerEffectMask.
 
 Set g_SamplerEmissive's sampler flags to the same value as those of g_SamplerDiffuse, and g_SamplerEffectMask's sampler flags to the same value as those of g_SamplerMask (they should be the same anyway).
@@ -160,6 +164,8 @@ There is no standard path for these new maps, but I suggest following the conven
 In Shader Keys (still in Advanced Shader Resources), add key `0x9D4A3204` and set it to `0x1E8ABB16`.
 
 ### Hair/Iris: Switching to level 3
+
+**Penumbra 0.7.3.3+ users**: Go to the Shader section and set Atramentum Luminis Semantics to Level 3. The rest of this section only applies up to 0.7.3.2, save for the path recommendations.
 
 In Samplers, add g_SamplerDiffuse, g_SamplerEmissive and g_SamplerEffectMask.
 
@@ -234,6 +240,8 @@ The game provides a few solid color textures at the following paths (figuring ou
 - `chara/common/texture/white.tex` ;
 - `chara/common/texture/red.tex` ;
 - `chara/common/texture/green.tex` ;
-- `chara/common/texture/blue.tex`.
+- `chara/common/texture/blue.tex` ;
+- `chara/common/texture/null_normal.tex` ;
+- `chara/common/texture/skin_m.tex`.
 
 While all of the samplers (and associated textures) are mandatory for a level 3 material, if you don't need one of them or want to set what it controls to a uniform value, you can use these textures instead of making your own.
