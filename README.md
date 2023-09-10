@@ -1,6 +1,6 @@
 # Atramentum Luminis Resources
 
-This repository contains various resources about Atramentum Luminis.
+This repository contains various resources about [Atramentum Luminis](https://heliosphere.app/mod/2y2p3pxxrh31f4yggbd8pcj47c).
 
 They may be used with the same permissions as Atramentum Luminis itself.
 
