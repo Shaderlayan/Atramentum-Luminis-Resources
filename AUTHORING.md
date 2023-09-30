@@ -1,8 +1,6 @@
 # Atramentum Luminis Authoring Manual
 
-⚠️ A word of warning before beginning: some of the manipulations described in the later sections of this manual _can crash your game if done wrong_. Please carefully read and fully understand any paragraph marked with warning signs before proceeding. ⚠️
-
-**Penumbra 0.7.3.3+ users**: A great part of the manipulations described later have been replaced by simpler and/or safer ones, and most hexadecimal identifiers have been replaced by plain English names. This guide will be updated again when these changes will be available in the stable channel. Also, for optimal material authoring experience, it's strongly recommended to install [Material Development Kit](https://heliosphere.app/mod/bktfny69y57gf4y42bp4tn5z38), at a lower priority than Atramentum Luminis.
+For optimal material authoring experience, it's strongly recommended to install [Material Development Kit](https://heliosphere.app/mod/bktfny69y57gf4y42bp4tn5z38), at a lower priority than Atramentum Luminis.
 
 Please note that this manual expects the reader to have a certain level of knowledge about general texture editing, and knowledge about how to locate the wanted files in Penumbra.
 
@@ -14,7 +12,9 @@ If you make mods that target Atramentum Luminis and/or write alternate versions 
 
 This level only requires editing textures to put information in some channels that are unused by the vanilla game.
 
-The mods you can make will target the "Textures-only (Legacy)" skin and iris frameworks.
+The mods you can make will target the "Textures-only" skin and iris frameworks.
+
+**Deprecated**: Creating new textures-only mods is not recommended, as the "Textures-only" frameworks are likely to be removed in the Atramentum Luminis Dawntrail update. It is instead recommended to also do material edits, as described in levels 2 and/or 3.
 
 ### Iris: Glow (Emissive)
 
@@ -41,26 +41,23 @@ This level requires editing textures the same way as above, but also materials.
 
 The mods you can make will target the "Textures and Materials" skin and iris frameworks.
 
-For all of the sections below, you first have to select the wanted material in Penumbra's Advanced Editing window and go into the `g_MaterialParameter` part, in Advanced Shader Resources *(in 733+: Material Constants)*. Once you're done, don't forget to save your file.
+For all of the sections below, you first have to select the wanted material in Penumbra's Advanced Editing window and go into the Material Constants section. Once you're done, don't forget to save your file and redraw yourself to make the changes permanent.
 
 ### Iris/Skin: Glow Adjustment
 
-To globally adjust the iris or skin glow, add the constant with ID `0x8F6498D1` *(in 733+: Emissive Conversion)* (it may already be there if editing an already modded material).
+To globally adjust the iris or skin glow, set the **Emissive Conversion** constants.
 
-- The first value is the global glow multiplier in well-lit environments ;
-- The second value is the global glow multiplier in dark environments.
-
-Both values must be set to 1 if you just want to have the same result as with the "Textures-only (Legacy)" frameworks.
+Both constants must be set to 1 if you just want to have the same result as with the "Textures-only" frameworks.
 
 ### Hair: Glow (Emissive) and Glow Adjustment
 
 To add glow information to hair, you have to edit the multi map. The glow information is to be added to the multi map's blue channel, in non-inverted form ("black" is no glow, "white" is full glow).
 
-To globally adjust the hair glow, add the constant with ID `0x8F6498D1` *(in 733+: Emissive Conversion)*, as described above.
+To globally adjust the hair glow, set the **Emissive Conversion** constants, as described above.
 
 ### Skin: Hair on Standard (non-Hrothgar) Body
 
-To add hair information to skin that uses the standard body shader, add the constant with ID `0xD367C386` *(in 733+: Enable Hair Influence)* and set it to 1.
+To add hair information to skin that uses the standard body shader, set the **Enable Hair Influence** constant to Yes.
 
 Then, add the hair influence information (just like the green channel for the Hrothgar shader) to the blue channel, and add the primary/secondary mix information (just like the blue channel for the Hrothgar shader) to the alpha channel.
 
@@ -68,30 +65,30 @@ The multi map's green channel will still be used as a specular map (instead of t
 
 ### Skin: Auri Scale Iridescence
 
-To add an iridescence effect to Auri scales like in the Hannish scale ointment mod, add the constant with ID `0x4103FEEF` *(in 733+: Iridescence)* to a skin material.
+To add an iridescence effect to Auri scales like in the Hannish scale ointment mod, set the constants of the **Iridescence** section on a skin material.
 
 Auri scales are detected depending on the red channel of the multi map: by default, values between 25% and 75% are considered scales.
 
-- The first value *(in 733+: Effect Strength)* is the global iridescence effect multiplier ;
-- The second value *(in 733+: Scale Detection Range Center)* shifts the scale detection range: for example (assuming other control values are 0), 0 *(in 733+: 0.5)* means 25% to 75%, -0.2 *(in 733+: 0.3)* means 5% to 55% ;
-- The third value *(in 733+: Scale Detection Range Tolerance)* narrows or expands the scale detection range: for example (assuming other control values are 0), 0 *(in 733+: 0.25)* means 25% to 75%, 0.1 *(in 733+: 0.35)* means 15% to 85% ;
-- The fourth value *(in 733+: Scale Detection Range Fuzziness)* sharpens or softens the ends of the scale detection range: for example (assuming other control values are 0), 0 *(in 733+: 0.05)* means that the effect gradually rolls off from 30% to 20%, -0.05 *(in 733+: 0)* means that it's all-or-nothing above and below 25% ;
-- The fifth value *(in 733+: Normal Z Bias)* attenuates the effect by applying a bias to the normals: 0 is equivalent to HSO's "Vibrant" options, 0.5 is equivalent to HSO's "Normal" options, 1 is equivalent to HSO's "Faint" options ;
-- The sixth value *(in 733+: Chroma)* is the maximum chroma radius to use: 0 will make the effect gray, 50 will be equivalent to HSO ;
-- The seventh value *(in 733+: Hue Shift)* is the hue angle shift in degrees: 0 gives a reddish hue to scales that face towards the right of the screen, positive values rotate the effect counterclockwise ;
-- The eight value *(in 733+: Hue Multiplier)* is the hue angle multiplier (it will be rounded to the nearest integer).
+- **Effect Strength** is the global iridescence effect multiplier ;
+- **Scale Detection Range Center** shifts the scale detection range: for example (assuming other control values are 0), 0.5 means 25% to 75%, 0.3 means 5% to 55% ;
+- **Scale Detection Range Tolerance** narrows or expands the scale detection range: for example (assuming other control values are 0), 0.25 means 25% to 75%, 0.35 means 15% to 85% ;
+- **Scale Detection Range Fuzziness** sharpens or softens the ends of the scale detection range: for example (assuming other control values are 0), 0.05 means that the effect gradually rolls off from 30% to 20%, 0 means that it's all-or-nothing above and below 25% ;
+- **Normal Z Bias** attenuates the effect by applying a bias to the normals: 0 is equivalent to HSO's "Vibrant" options, 0.5 is equivalent to HSO's "Normal" options, 1 is equivalent to HSO's "Faint" options ;
+- **Chroma** is the maximum chroma radius to use: 0 will make the effect gray, 50 will be equivalent to HSO ;
+- **Hue Shift** is the hue angle shift in degrees: 0 gives a reddish hue to scales that face towards the right of the screen, positive values rotate the effect counterclockwise ;
+- **Hue Multiplier** is the hue angle multiplier (it will be rounded to the nearest integer).
 
 The effect is compatible with most scale overlays with the three control values left at 0, and should be compatible with all of them by tweaking these values.
 
-Note: all the builds of Hannish scale ointment since 2.0 are actually just special builds of Atramentum Luminis's "Textures-only (Legacy)" skin framework, with this constant forced to 1, 0, 0, 0, 0|0.5|1, 50, 0|90|180|-90, 1|-1|3.
+Note: all the builds of Hannish scale ointment since 2.0 are actually just special builds of Atramentum Luminis's "Textures-only" skin framework, with this constant forced to 1, 0, 0, 0, 0|0.5|1, 50, 0|90|180|-90, 1|-1|3.
 
 ### Skin: Asymmetry Adapter
 
-If you want to use an asymmetric texture with a symmetric model, or a symmetric texture with an asymmetric model, add the constant with ID `0x5E3ABDFB` *(in 733+: Asymmetry Adapter)*.
+If you want to use an asymmetric texture with a symmetric model, or a symmetric texture with an asymmetric model, set the **Asymmetry Adapter** constant.
 
-- If your texture matches your model, the value must be set to 0 ;
-- If your texture is asymmetric and your model is symmetric, the value must be set to 1 ;
-- If your texture is symmetric and your model is asymmetric, the value must be set to -1.
+- If your texture matches your model, the constant must be set to *None* ;
+- If your texture is asymmetric and your model is symmetric, the constant must be set to *Sym. model, asym. textures* ;
+- If your texture is symmetric and your model is asymmetric, the constant must be set to *Asym. model, sym. textures*.
 
 Please note that the remapping functions used are very simple (namely, `uAsym = (1±uSym)/2`, `tAsym = ±tSym`, u and t denoting respectively the horizontal texture coordinate and the surface tangent vector). It happens that the Bibo+ and The Body SE UV layouts and surface geometries have a relationship with the vanilla/Gen2 ones that's mostly accurately modeled by these equations, but it's not perfect (especially for NSFW). If you want an asymmetric texture that completely works on vanilla/Gen2 models, you'll have to work with a properly "unfolded" vanilla/Gen2 texture.
 
@@ -103,10 +100,10 @@ The left half of the textures will be applied to the right half of the body/face
 
 ### Iris: Asymmetry Adapter
 
-If you want to use an asymmetric texture with a symmetric model, a symmetric texture with an asymmetric model, or an asymmetric catchlight map, add the constant with ID `0x5E3ABDFB` *(in 733+: Asymmetry Adapter)*.
+If you want to use an asymmetric texture with a symmetric model, a symmetric texture with an asymmetric model, or an asymmetric catchlight map, set the **Asymmetry Adapter** constants.
 
-- The first value works in the same way as the value for the skin asymmetry adapter ;
-- The second value must be 0 if your catchlight map is symmetric, 1 if it's asymmetric.
+- **Asymmetry Adapter** works in the same way as for the skin ;
+- **Catchlight Asymmetry Adapter** must be *Symmetric catchlight map* if your catchlight map is symmetric, *Asymmetric catchlight map* if it's asymmetric.
 
 The left half of the textures will be applied to the right eye, and the right half of the textures will be applied to the left eye (if you set the camera right in front of your character, the left of the texture will be to the left of the screen).
 
@@ -116,68 +113,27 @@ Please note that the catchlight map's UVs have nothing to do with the vertex UVs
 
 The overdone bloom effect that was found in Atramentum Luminis 1.x and 2.x was due to it being calculated using a wrong formula (in some way, it's a bug that's been fixed in 3.0).
 
-Yet, if you liked it, it's still available, and can be configured by adding the constant with ID `0xA5EDBE5C` *(in 733+: Legacy Bloom)*.
-
-- The first value is the global bloom multiplier in well-lit environments ;
-- The second value is the global bloom multiplier in dark environments.
+Yet, if you liked it, it's still available, and can be configured by setting the **Legacy Bloom** constants.
 
 ### Compatibility
 
-The vanilla game ignores the new parameters, and the "Textures-only (Legacy)" frameworks take into account some of the parameters and ignore the others (yet, if you do any material edits, it's recommended to work only with the "Textures and Materials" frameworks). Therefore, using edited materials without Atramentum Luminis will give the same result as if the parameters were not defined. Using edited materials with "Textures-only (Legacy)" frameworks will give results that may be stronger or weaker than indended.
+The vanilla game ignores the new parameters, and the "Textures-only" frameworks take into account some of the parameters and ignore the others (yet, if you do any material edits, it's recommended to work only with the "Textures and Materials" frameworks). Therefore, using edited materials without Atramentum Luminis will give the same result as if the parameters were not defined. Using edited materials with "Textures-only" frameworks will give results that may be stronger or weaker than indended.
 
 ## Level 3: More Textures and Materials
 
-```
-                  .;=,;===,
-                 //\ / _,'
-                /"/='-':==-.     HERE
-                `'`==.(\    )
-              ,' :    '"          BE
-             : : :
-     ___   .' :: : .    __:.    DRAGONS
-    /___\ .'_:\:/:::\: /:.:\.
-l42_|++n|:|+::|:|::n:::|.::|:.
-```
+This level requires editing textures and materials further than above.
 
-This level requires editing textures and materials, ⚠️ _in ways that can crash your game if done wrong_ ⚠️.
-
-The mods you can make will target the "Textures and Materials" skin and iris frameworks.
+The mods you can make will also target the "Textures and Materials" skin and iris frameworks.
 
 Please note that this level changes how some things are interpreted in such a way that, just as with level 2, only enabling it without proper configuration can nullify some of the effects with no benefit.
 
-### Skin: Switching to level 3
+### Skin/Hair/Iris: Switching to level 3
 
-**Penumbra 0.7.3.3+ users**: Go to the Shader section and set Atramentum Luminis Semantics to Level 3. The rest of this section only applies up to 0.7.3.2, save for the path recommendations.
+In the Shader section, set **Atramentum Luminis Semantics** to *Level 3*.
 
-In Samplers (in Advanced Shader Resources), add g_SamplerEmissive and g_SamplerEffectMask.
+This will automatically add new maps as required, set to a default that does not enable any new effects. You then have to change the paths for maps you want to actually use.
 
-Set g_SamplerEmissive's sampler flags to the same value as those of g_SamplerDiffuse, and g_SamplerEffectMask's sampler flags to the same value as those of g_SamplerMask (they should be the same anyway).
-
-The texture flags must be set to `8000` if you want the game to add the `--` prefix to the texture file name, otherwise `0000`.
-
-Go back to the top of the editor and set the texture path for g_SamplerEmissive and g_SamplerEffectMask to `chara/common/texture/transparent.tex` (unless you already have the paths to the actual maps you plan to use).
-
-There is no standard path for these new maps, but I suggest following the convention of the existing maps of your material, with a `_e` suffix for the emissive and `_x` for the effect mask.
-
-⚠️ To avoid crashes, all of the above must be done before doing the step below, and the step below must be undone before undoing any of the above. ⚠️
-
-In Shader Keys (still in Advanced Shader Resources), add key `0x9D4A3204` and set it to `0x1E8ABB16`.
-
-### Hair/Iris: Switching to level 3
-
-**Penumbra 0.7.3.3+ users**: Go to the Shader section and set Atramentum Luminis Semantics to Level 3. The rest of this section only applies up to 0.7.3.2, save for the path recommendations.
-
-In Samplers, add g_SamplerDiffuse, g_SamplerEmissive and g_SamplerEffectMask.
-
-Set g_SamplerDiffuse, g_SamplerEmissive and g_SamplerEffectMask's sampler flags to the same value as those of g_SamplerMask.
-
-Go back to the top of the editor and set the texture path for g_SamplerDiffuse, g_SamplerEmissive and g_SamplerEffectMask to `chara/common/texture/transparent.tex` (unless you already have the paths to the actual maps you plan to use).
-
-There is no standard path for these new maps, but I suggest following the convention of the existing maps of your material, with a `_d` suffix for the diffuse, `_e` for the emissive and `_x` for the effect mask.
-
-⚠️ To avoid crashes, all of the above must be done before doing the step below, and the step below must be undone before undoing any of the above. ⚠️
-
-In Shader Keys (still in Advanced Shader Resources), add key `0x9D4A3204` and set it to `0x1E8ABB16`.
+There is no standard path for these new maps, but I suggest following the convention of the existing maps of your material, with a `_d` suffix for the diffuse, `_e` suffix for the emissive and `_x` for the effect mask.
 
 ### Skin: Using the emissive map
 
@@ -229,7 +185,7 @@ Hair iridescence is only available at level 3 and works the same way as level 3 
 
 ### Compatibility
 
-The vanilla game and the "Textures-only (Legacy)" frameworks ignore the new shader key and samplers. Therefore, using materials with level 3 edits without Atramentum Luminis or with a "Textures-only (Legacy)" framework will give the same results as if the shader key and samplers were not defined.
+The vanilla game and the "Textures-only" frameworks ignore the new shader key and samplers. Therefore, using materials with level 3 edits without Atramentum Luminis or with a "Textures-only" framework will give the same results as if the shader key and samplers were not defined.
 
 ### Tips
 
